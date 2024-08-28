@@ -52,3 +52,34 @@
 
 - A Firewall can typically be administered via a proprietary management application, or via a web-browser accessing the Firewalls management via HTTP.
 - Management ports to Firewalls, including other management services of an organization, should ideally be segmented away from regular user access. Ideally the segmentation of management services is connected to an organizations user directory, for example Active Directory for Windows environments.
+
+## Segmentation
+
+- Firewalls can segment traffic between hosts and systems into segments, sometimes called zones. Each segment holds services which are allowed to communicate between one another.
+
+  ![Segmentation](./img_firewall-segmentation.svg)
+
+- Any connection to or from the segment should be carefully controlled by the Firewall, preventing any unauthorized connections to make successful connections. Smaller segments offer more segregation, but requires more management.
+
+- Without any segmentation, users and systems can talk directly to each other without the Firewalls enforcement. This is called a flat network.
+
+  ![No Segmentation](./img_no-segmentation.svg)
+
+- Adding more segmentation we can envision segments representing services, where each segment is a service provided in the organization. Each segment could contain the different servers responsible for making the service operational. Communications within the segment is allowed, but any access in and out from the segment is controlled by the Firewall.
+
+- Another segmentation idea would be to control segments based on their functions, for example clustering web applications within a segment with other web-applications, databases within one segment and other kinds of services within their segment.
+
+> **Note:** A very common user directory is Microsoft's Windows Active Directory. It holds information about which users, computers and groupings the organization holds.
+
+![More segmentation](./img_more-segmentation.svg)
+
+- The best and most secure kind of segmentation is called zero-trust architecture, forcing all systems on the network to explicitly be allowed to communicate to different services.
+
+- To ease management of Firewall rules, the Firewall management is ideally connected to the organizations user directory. This can allow Firewall administrators to create careful rules based on employee responsibilities, allowing the organization to add and remove permissions which are applied on the network without asking the Firewall administrators for changes anytime there is a role change. This is sometimes called user-based policy control. Examples include:
+
+  - IT-Administrators should be able to use management protocols to the different services.
+  - HR employees should be allowed to access HTTPS to the HR platforms.
+  - Helpdesk employees can only access helpdesk related services.
+  - Unrecognizable users can be identified and provisioned accordingly.
+
+> **Note:** A very common user directory is Microsoft's Windows Active Directory. It holds information about which users, computers and groupings the organization holds.
